@@ -1,272 +1,280 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Malla Curricular - Ingeniería en Nanotecnología</title>
+  <meta charset="UTF-8">
+  <title>Malla Curricular Nanotecnología</title>
   <style>
-    :root{
-      --bg: #f5f8fb;
-      --card:#ffffff;
-      --muted:#8a98a6;
-      --accent:#6aa6d6;
-      --success:#8be5a6;
-      --danger:#ffd59a;
-      --shadow: rgba(18,38,63,0.08);
-      --radius:12px;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8fafc;
+      color: #333;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#123;padding:28px}
-    h1{text-align:center;margin:6px 0 20px;font-weight:700}
-
-    .controls{display:flex;gap:10px;justify-content:center;margin-bottom:14px}
-    .btn{background:var(--card);border:1px solid #e6eef6;padding:8px 12px;border-radius:8px;cursor:pointer;box-shadow:0 2px 6px var(--shadow)}
-    .btn.danger{background:linear-gradient(180deg,#fffbf2,#fff3e0);border-color:#ffd59a}
-
-    .grid-wrapper{overflow:auto;padding:6px;border-radius:10px}
-    .grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:18px;padding:12px}
-
-    .semester{background:var(--card);min-width:220px;border-radius:var(--radius);padding:12px 14px;box-shadow:0 6px 18px var(--shadow)}
-    .semester h2{margin:0 0 8px;font-size:14px;color:#0f3a57}
-
-    .subject{background:#f7fbff;border-radius:8px;padding:10px 10px;margin:8px 0;cursor:pointer;border-left:5px solid var(--accent);position:relative;transition:transform .08s,box-shadow .08s}
-    .subject:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(10,30,50,0.06)}
-    .subject.approved{background:var(--success);text-decoration:line-through;border-left-color:#3aa86f}
-    .subject.locked{background:var(--danger);cursor:not-allowed;border-left-color:#e09b3a}
-
-    /* tooltip element inside subject */
-    .tooltip{display:none;position:absolute;left:12px;top:calc(100% + 8px);background:#0b2233;color:#fff;padding:8px;border-radius:8px;font-size:12px;white-space:pre-line;z-index:30;box-shadow:0 6px 18px rgba(2,18,28,0.25)}
-    .subject.locked:hover .tooltip{display:block}
-
-    /* responsive: show two rows on wide screens if many semesters */
-    @media(min-width:1200px){
-      .grid{grid-auto-flow:row;grid-template-columns:repeat(5,minmax(220px,1fr));grid-auto-rows:auto}
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #2c3e50;
     }
-
-    /* small screens */
-    @media(max-width:640px){
-      .grid{grid-auto-columns:minmax(180px,1fr);gap:12px}
-      .semester{min-width:180px}
+    .container {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 20px;
     }
-
-    .legend{display:flex;gap:10px;justify-content:center;margin-top:10px;font-size:13px;color:var(--muted)}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 8px;border-radius:999px;background:#fff;border:1px solid #e9f2fb}
-    .chip .dot{width:12px;height:12px;border-radius:6px}
+    .semester {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      min-width: 220px;
+      flex-shrink: 0;
+    }
+    .semester h2 {
+      font-size: 16px;
+      margin-top: 0;
+      text-align: center;
+      background: #3498db;
+      color: white;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    .course {
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 6px;
+      background: #ecf0f1;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .course.approved {
+      background: #2ecc71;
+      color: white;
+      text-decoration: line-through;
+    }
+    .course.locked {
+      background: #dfe6e9;
+      color: #636e72;
+      cursor: not-allowed;
+    }
+    .course.locked::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: normal;
+      opacity: 0;
+      pointer-events: none;
+      width: max-content;
+      max-width: 200px;
+      z-index: 10;
+      transition: opacity 0.3s;
+    }
+    .course.locked:hover::after {
+      opacity: 1;
+    }
+    .controls {
+      text-align: center;
+      margin: 15px;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2980b9;
+    }
   </style>
 </head>
 <body>
-  <h1>Malla Curricular — Ingeniería en Nanotecnología</h1>
+  <h1>Malla Curricular - Ingeniería en Nanotecnología</h1>
   <div class="controls">
-    <button class="btn" id="exportBtn" title="Exportar progreso como JSON">Exportar</button>
-    <button class="btn" id="importBtn" title="Importar progreso (pegar JSON)">Importar</button>
-    <button class="btn danger" id="resetBtn">Reiniciar progreso</button>
+    <button onclick="exportProgress()">Exportar progreso</button>
+    <button onclick="importProgress()">Importar progreso</button>
+    <button onclick="resetProgress()">Reiniciar</button>
   </div>
-
-  <div class="grid-wrapper">
-    <div class="grid" id="malla"></div>
-  </div>
-
-  <div class="legend">
-    <div class="chip"><span class="dot" style="background:var(--accent)"></span> Por cursar</div>
-    <div class="chip"><span class="dot" style="background:var(--success)"></span> Aprobada</div>
-    <div class="chip"><span class="dot" style="background:var(--danger)"></span> Bloqueada (faltan requisitos)</div>
-  </div>
+  <div class="container" id="container"></div>
 
   <script>
-    // Malla de la carrera — usar nombres exactos para requisitos
-    const malla = {
-      "PRIMER SEMESTRE": [
-        "Cálculo diferencial",
-        "Geometría Analítica",
-        "Fundamentos de la Química",
-        "Introducción a la Nanotecnología",
-        "Sistemas Bioinspirados",
-        "Optativa CBD"
+    const semesters = {
+      'PRIMER SEMESTRE': [
+        {name: 'Cálculo diferencial'},
+        {name: 'Geometría Analítica'},
+        {name: 'Fundamentos de la Química'},
+        {name: 'Introducción a la Nanotecnología'},
+        {name: 'Sistemas Bioinspirados'},
+        {name: 'Optativa CBD'}
       ],
-
-      "SEGUNDO SEMESTRE": [
-        { name: "Algebra lineal", req: ["Geometría Analítica"] },
-        { name: "Química inorgánica", req: ["Fundamentos de la Química"] },
-        { name: "Calculo Integral", req: ["Cálculo diferencial"] },
-        { name: "Fisica mecánica", req: ["Cálculo diferencial","Geometría Analítica"] },
-        { name: "Materiales de Ingeniería", req: ["Fundamentos de la Química"] },
-        "Electiva I"
+      'SEGUNDO SEMESTRE': [
+        {name: 'Algebra lineal', req: ['Geometría Analítica']},
+        {name: 'Química inorgánica', req: ['Fundamentos de la Química']},
+        {name: 'Calculo Integral', req: ['Cálculo diferencial']},
+        {name: 'Fisica mecánica', req: ['Cálculo diferencial','Geometría Analítica']},
+        {name: 'Materiales de Ingeniería', req: ['Fundamentos de la Química']},
+        {name: 'Electiva I'}
       ],
-
-      "TERCER SEMESTRE": [
-        "Humanismo, Cultura y Valores",
-        { name: "Ecuaciones Diferenciales", req: ["Calculo Integral"] },
-        { name: "Electricidad y Magnetismo", req: ["Fisica mecánica"] },
-        { name: "Métodos Experimentales", req: ["Fisica mecánica"] },
-        { name: "Técnicas de Caracterización de Materiales", req: ["Materiales de Ingeniería"] },
-        "Química Orgánica",
-        "Metodología de la investigación"
+      'TERCER SEMESTRE': [
+        {name: 'Humanismo, Cultura y Valores'},
+        {name: 'Ecuaciones Diferenciales', req: ['Calculo Integral']},
+        {name: 'Electricidad y Magnetismo', req: ['Fisica mecánica']},
+        {name: 'Métodos Experimentales', req: ['Fisica mecánica']},
+        {name: 'Técnicas de Caracterización de Materiales', req: ['Materiales de Ingeniería']},
+        {name: 'Química Orgánica'},
+        {name: 'Metodología de la investigación'}
       ],
-
-      "CUARTO SEMESTRE": [
-        "Cristología",
-        "Lengua y Cultura",
-        { name: "Calculo Vectorial", req: ["Calculo Integral"] },
-        { name: "Física Moderna", req: ["Electricidad y Magnetismo","Ecuaciones Diferenciales"] },
-        { name: "Nanotecnología I", req: ["Materiales de Ingeniería"] },
-        { name: "Fisicoquímica", req: ["Fundamentos de la Química","Calculo Integral"] }
+      'CUARTO SEMESTRE': [
+        {name: 'Cristología'},
+        {name: 'Lengua y Cultura'},
+        {name: 'Calculo Vectorial', req: ['Calculo Integral']},
+        {name: 'Física Moderna', req: ['Electricidad y Magnetismo','Ecuaciones Diferenciales']},
+        {name: 'Nanotecnología I', req: ['Materiales de Ingeniería']},
+        {name: 'Fisicoquímica', req: ['Fundamentos de la Química','Calculo Integral']}
       ],
-
-      "QUINTO SEMESTRE": [
-        { name: "Métodos Numéricos", req: ["Ecuaciones Diferenciales"] },
-        { name: "Programación", req: ["Calculo Vectorial","Ecuaciones Diferenciales"] },
-        { name: "Termodinámica", req: ["Fisicoquímica","Ecuaciones Diferenciales"] },
-        { name: "Fenómenos de Transporte", req: ["Ecuaciones Diferenciales","Calculo Vectorial"] },
-        { name: "Nanotecnología II", req: ["Nanotecnología I","Técnicas de Caracterización de Materiales"] },
-        { name: "Técnicas de Caracterización de Nanomateriales", req: ["Técnicas de Caracterización de Materiales"] }
+      'QUINTO SEMESTRE': [
+        {name: 'Métodos Numéricos', req: ['Ecuaciones Diferenciales']},
+        {name: 'Programación', req: ['Calculo Vectorial','Ecuaciones Diferenciales']},
+        {name: 'Termodinámica', req: ['Fisicoquímica','Ecuaciones Diferenciales']},
+        {name: 'Fenómenos de Transporte', req: ['Ecuaciones Diferenciales','Calculo Vectorial']},
+        {name: 'Nanotecnología II', req: ['Nanotecnología I','Técnicas de Caracterización de Materiales']},
+        {name: 'Técnicas de Caracterización de Nanomateriales', req: ['Técnicas de Caracterización de Materiales']}
       ],
-
-      "SEXTO SEMESTRE": [
-        "Estadística y Diseño de Experimentos",
-        { name: "Nanociencia", req: ["Física Moderna"] },
-        { name: "Reología y Nano fluidos", req: ["Fenómenos de Transporte"] },
-        { name: "Nanotecnología III", req: ["Nanotecnología II"] },
-        { name: "Coloides y Química de Superficies", req: ["Termodinámica"] },
-        "Electiva II"
+      'SEXTO SEMESTRE': [
+        {name: 'Estadística y Diseño de Experimentos'},
+        {name: 'Nanociencia', req: ['Física Moderna']},
+        {name: 'Reología y Nano fluidos', req: ['Fenómenos de Transporte']},
+        {name: 'Nanotecnología III', req: ['Nanotecnología II']},
+        {name: 'Coloides y Química de Superficies', req: ['Termodinámica']},
+        {name: 'Electiva II'}
       ],
-
-      "SEPTIMO SEMESTRE": [
-        "Línea de Formación I",
-        "Emprendimiento y Responsabilidad Social",
-        "Economía",
-        { name: "Núcleo de Integración I", req: ["Nanotecnología II","Técnicas de Caracterización de Nanomateriales","Nanociencia"] },
-        { name: "Bionanotecnología", req: ["Sistemas Bioinspirados","Nanotecnología I","Química Orgánica"] },
-        "Basic Writing Skills"
+      'SEPTIMO SEMESTRE': [
+        {name: 'Línea de Formación I'},
+        {name: 'Emprendimiento y Responsabilidad Social'},
+        {name: 'Economía'},
+        {name: 'Núcleo de Integración I', req: ['Nanotecnología II','Técnicas de Caracterización de Nanomateriales','Nanociencia']},
+        {name: 'Bionanotecnología', req: ['Sistemas Bioinspirados','Nanotecnología I','Química Orgánica']},
+        {name: 'Basic Writing Skills'}
       ],
-
-      "OCTAVO SEMESTRE": [
-        "Línea de Formación II",
-        "Ética General",
-        { name: "Economía Internacional", req: ["Economía"] },
-        { name: "Núcleo de Integración II", req: ["Núcleo de Integración I"] },
-        "Gestión de proyectos",
-        "Optativa CI 2"
+      'OCTAVO SEMESTRE': [
+        {name: 'Línea de Formación II'},
+        {name: 'Ética General'},
+        {name: 'Economía Internacional', req: ['Economía']},
+        {name: 'Núcleo de Integración II', req: ['Núcleo de Integración I']},
+        {name: 'Gestión de proyectos'},
+        {name: 'Optativa CI 2'}
       ],
-
-      "NOVENO SEMESTRE": [
-        "Línea de Formación III",
-        { name: "Ética Profesional", req: ["Ética General"] },
-        { name: "Gestión e Innovación en Nanotecnología", req: ["Economía Internacional","Nanotecnología III"] },
-        { name: "Núcleo de Integración III", req: ["Núcleo de Integración II"] },
-        { name: "Contexto profesional", req: ["Núcleo de Integración II"] },
-        "Optativa CI 3"
+      'NOVENO SEMESTRE': [
+        {name: 'Línea de Formación III'},
+        {name: 'Ética Profesional', req: ['Ética General']},
+        {name: 'Gestión e Innovación en Nanotecnología', req: ['Economía Internacional','Nanotecnología III']},
+        {name: 'Núcleo de Integración III', req: ['Núcleo de Integración II']},
+        {name: 'Contexto profesional', req: ['Núcleo de Integración II']},
+        {name: 'Optativa CI 3'}
       ],
-
-      "DECIMO SEMESTRE": [
-        { name: "Práctica Profesional", req: Object.keys({}).concat([]) } // placeholder — will be replaced below to require all previous subjects
+      'DECIMO SEMESTRE': [
+        {name: 'Práctica Profesional', req: 'ALL'}
       ]
     };
 
-    // Build list of all course names to set Práctica Profesional requirements
-    (function setPracticaReqs(){
-      const todas = [];
-      for(const sem of Object.values(malla)){
-        for(const item of sem){
-          const name = (typeof item === 'string')? item : item.name;
-          // skip placeholder practice itself
-          if(name === 'Práctica Profesional') continue;
-          todas.push(name);
-        }
-      }
-      // set reqs array for práctica
-      malla['DECIMO SEMESTRE'][0].req = todas;
-    })();
-
-    // Load aprobadas from localStorage
-    const STORAGE_KEY = 'nano_aprobadas_v1';
-    let aprobadas = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-
-    // Render
-    const container = document.getElementById('malla');
-
-    function isReqSatisfied(req){
-      return aprobadas.includes(req);
-    }
+    let approved = JSON.parse(localStorage.getItem('nano_aprobadas_v1')||'[]');
 
     function render(){
-      container.innerHTML = '';
-      for(const [sem, materias] of Object.entries(malla)){
-        const semDiv = document.createElement('div');
-        semDiv.className = 'semester';
-        const h = document.createElement('h2'); h.textContent = sem; semDiv.appendChild(h);
+      const container=document.getElementById('container');
+      container.innerHTML='';
+      for(const [sem, courses] of Object.entries(semesters)){
+        const div=document.createElement('div');
+        div.className='semester';
+        const h2=document.createElement('h2');
+        h2.textContent=sem;
+        div.appendChild(h2);
 
-        materias.forEach(raw =>{
-          const name = (typeof raw === 'string')? raw : raw.name;
-          const reqs = raw.req || [];
+        courses.forEach(c=>{
+          const course=document.createElement('div');
+          course.className='course';
+          course.textContent=c.name;
 
-          const item = document.createElement('div');
-          item.className = 'subject';
-          item.textContent = name;
-
-          // compute if locked
-          const missing = reqs.filter(r => !isReqSatisfied(r));
-          const locked = (reqs.length>0) && missing.length>0;
-
-          if(aprobadas.includes(name)) item.classList.add('approved');
-          else if(locked) item.classList.add('locked');
-
-          // tooltip for locked showing missing
-          if(locked){
-            const tip = document.createElement('div');
-            tip.className = 'tooltip';
-            tip.textContent = 'Faltan requisitos:\n' + missing.join('\n');
-            item.appendChild(tip);
+          let locked=false;
+          if(c.req){
+            if(c.req==='ALL'){
+              locked = approved.length < totalCourses()-1;
+            } else {
+              locked = !c.req.every(r=>approved.includes(r));
+            }
           }
 
-          // click toggles approved if not locked
-          item.addEventListener('click', ()=>{
-            if(locked) return; // do nothing
-            const idx = aprobadas.indexOf(name);
-            if(idx>=0) aprobadas.splice(idx,1);
-            else aprobadas.push(name);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(aprobadas));
-            render();
-          });
+          if(approved.includes(c.name)){
+            course.classList.add('approved');
+          } else if(locked){
+            course.classList.add('locked');
+            const faltan=(c.req==='ALL')? 'Todas las materias anteriores' : c.req.filter(r=>!approved.includes(r)).join(', ');
+            course.setAttribute('data-tooltip','Requisitos: '+faltan);
+          }
 
-          semDiv.appendChild(item);
+          if(!locked){
+            course.addEventListener('click',()=>{
+              if(approved.includes(c.name)){
+                approved=approved.filter(x=>x!==c.name);
+              } else {
+                approved.push(c.name);
+              }
+              localStorage.setItem('nano_aprobadas_v1',JSON.stringify(approved));
+              render();
+            });
+          }
+
+          div.appendChild(course);
         });
-
-        container.appendChild(semDiv);
+        container.appendChild(div);
       }
     }
 
-    // Controls: reset, export, import
-    document.getElementById('resetBtn').addEventListener('click', ()=>{
-      if(!confirm('¿Reiniciar todo el progreso?')) return;
-      aprobadas = [];
-      localStorage.removeItem(STORAGE_KEY);
-      render();
-    });
+    function totalCourses(){
+      return Object.values(semesters).flat().length;
+    }
 
-    document.getElementById('exportBtn').addEventListener('click', ()=>{
-      const data = JSON.stringify({aprobadas, timestamp: Date.now()}, null, 2);
-      // download as file
-      const blob = new Blob([data], {type:'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'nano_progreso.json'; a.click(); URL.revokeObjectURL(url);
-    });
+    function exportProgress(){
+      const data=JSON.stringify(approved);
+      const blob=new Blob([data],{type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download='progreso_nanotecnologia.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
 
-    document.getElementById('importBtn').addEventListener('click', ()=>{
-      const txt = prompt('Pega aquí el JSON exportado del progreso:');
-      if(!txt) return;
+    function importProgress(){
+      const input=prompt('Pega aquí el JSON exportado:');
       try{
-        const parsed = JSON.parse(txt);
-        if(Array.isArray(parsed.aprobadas)){
-          aprobadas = parsed.aprobadas;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(aprobadas));
+        const data=JSON.parse(input);
+        if(Array.isArray(data)){
+          approved=data;
+          localStorage.setItem('nano_aprobadas_v1',JSON.stringify(approved));
           render();
-          alert('Progreso importado correctamente.');
-        }else alert('JSON inválido: campo aprobadas no encontrado.');
-      }catch(e){alert('JSON inválido')}
-    });
+        }
+      }catch(e){alert('JSON inválido');}
+    }
 
-    // initial render
+    function resetProgress(){
+      if(confirm('¿Seguro que quieres reiniciar el progreso?')){
+        approved=[];
+        localStorage.removeItem('nano_aprobadas_v1');
+        render();
+      }
+    }
+
     render();
   </script>
 </body>
