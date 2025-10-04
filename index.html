@@ -2,260 +2,230 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Malla Curricular - Ingeniería en Nanotecnología</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f9fc;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: #f4f7fa;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
-
     h1 {
       text-align: center;
-      margin: 20px 0;
-      color: #0d2c54;
+      color: #2c3e50;
+      margin-bottom: 30px;
     }
-
-    .container {
+    .semestres {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      padding: 20px;
     }
-
-    .semester {
-      background: white;
+    .semestre {
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
       padding: 15px;
-      width: 250px;
+      width: 260px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    .semester h2 {
-      text-align: center;
+    .semestre h2 {
       font-size: 18px;
-      color: #0d2c54;
-      margin-bottom: 15px;
-    }
-
-    .course {
-      background: #d3d3d3;
-      padding: 8px;
-      margin: 6px 0;
-      border-radius: 6px;
-      font-size: 14px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    /* Cursos desbloqueados */
-    .course.unlocked {
-      background: #98f5a9;
-      text-decoration: line-through;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      visibility: hidden;
-      background-color: #333;
-      color: #fff;
       text-align: center;
-      border-radius: 6px;
-      padding: 5px;
-      position: absolute;
-      z-index: 9999;
-      bottom: 110%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      white-space: nowrap;
+      color: #004080;
+      margin-bottom: 10px;
     }
-
-    .course:hover .tooltip {
-      visibility: visible;
-      opacity: 1;
+    .materia {
+      background: #e0e0e0;
+      margin: 6px 0;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+    .materia.aprobada {
+      background: #a8e6a2;
+      text-decoration: line-through;
+      color: #2c662d;
+    }
+    .materia.bloqueada {
+      background: #dcdcdc;
+      color: #777;
+      cursor: not-allowed;
+    }
+    .materia:hover::after {
+      content: attr(data-requisitos);
+      position: absolute;
+      left: 105%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #333;
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 6px;
+      white-space: pre-line;
+      font-size: 12px;
+      display: none;
+    }
+    .materia.bloqueada:hover::after {
+      display: block;
     }
   </style>
 </head>
 <body>
-
   <h1>Malla Curricular - Ingeniería en Nanotecnología</h1>
-  <div class="container">
+  <div class="semestres">
 
     <!-- PRIMER SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>PRIMER SEMESTRE</h2>
-      <div class="course unlocked">Cálculo diferencial</div>
-      <div class="course unlocked">Geometría analítica</div>
-      <div class="course unlocked">Fundamentos de la Química</div>
-      <div class="course unlocked">Introducción a la Nanotecnología</div>
-      <div class="course unlocked">Sistemas Bioinspirados</div>
-      <div class="course unlocked">Optativa CBD</div>
+      <div class="materia" data-id="calculo-diferencial">Cálculo diferencial</div>
+      <div class="materia" data-id="geometria-analitica">Geometría Analítica</div>
+      <div class="materia" data-id="fundamentos-quimica">Fundamentos de la Química</div>
+      <div class="materia" data-id="intro-nano">Introducción a la Nanotecnología</div>
+      <div class="materia" data-id="sistemas-bio">Sistemas Bioinspirados</div>
+      <div class="materia" data-id="optativa-cbd">Optativa CBD</div>
     </div>
 
     <!-- SEGUNDO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>SEGUNDO SEMESTRE</h2>
-      <div class="course">Álgebra lineal
-        <div class="tooltip">Requiere: Geometría analítica</div>
-      </div>
-      <div class="course">Química inorgánica
-        <div class="tooltip">Requiere: Fundamentos de la Química</div>
-      </div>
-      <div class="course">Cálculo Integral
-        <div class="tooltip">Requiere: Cálculo diferencial</div>
-      </div>
-      <div class="course">Física mecánica
-        <div class="tooltip">Requiere: Cálculo diferencial, Geometría analítica</div>
-      </div>
-      <div class="course">Materiales de Ingeniería
-        <div class="tooltip">Requiere: Fundamentos de la Química</div>
-      </div>
-      <div class="course">Electiva I</div>
+      <div class="materia bloqueada" data-id="algebra-lineal" data-req="geometria-analitica">Álgebra lineal</div>
+      <div class="materia bloqueada" data-id="quimica-inorganica" data-req="fundamentos-quimica">Química inorgánica</div>
+      <div class="materia bloqueada" data-id="calculo-integral" data-req="calculo-diferencial">Cálculo Integral</div>
+      <div class="materia bloqueada" data-id="fisica-mecanica" data-req="calculo-diferencial,geometria-analitica">Física mecánica</div>
+      <div class="materia bloqueada" data-id="materiales" data-req="fundamentos-quimica">Materiales de Ingeniería</div>
+      <div class="materia" data-id="electiva1">Electiva I</div>
     </div>
 
     <!-- TERCER SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>TERCER SEMESTRE</h2>
-      <div class="course">Humanismo, Cultura y Valores</div>
-      <div class="course">Ecuaciones Diferenciales
-        <div class="tooltip">Requiere: Cálculo Integral</div>
-      </div>
-      <div class="course">Electricidad y Magnetismo
-        <div class="tooltip">Requiere: Física mecánica</div>
-      </div>
-      <div class="course">Métodos Experimentales
-        <div class="tooltip">Requiere: Física mecánica</div>
-      </div>
-      <div class="course">Técnicas de Caracterización de Materiales
-        <div class="tooltip">Requiere: Materiales de Ingeniería</div>
-      </div>
-      <div class="course">Química Orgánica</div>
-      <div class="course">Metodología de la investigación</div>
+      <div class="materia" data-id="humanismo">Humanismo, Cultura y Valores</div>
+      <div class="materia bloqueada" data-id="ecuaciones-dif" data-req="calculo-integral">Ecuaciones Diferenciales</div>
+      <div class="materia bloqueada" data-id="electricidad" data-req="fisica-mecanica">Electricidad y Magnetismo</div>
+      <div class="materia bloqueada" data-id="metodos-experimentales" data-req="fisica-mecanica">Métodos Experimentales</div>
+      <div class="materia bloqueada" data-id="tecnicas-carac" data-req="materiales">Técnicas de Caracterización de Materiales</div>
+      <div class="materia" data-id="quimica-organica">Química Orgánica</div>
+      <div class="materia" data-id="metodologia">Metodología de la investigación</div>
     </div>
 
     <!-- CUARTO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>CUARTO SEMESTRE</h2>
-      <div class="course">Cristología</div>
-      <div class="course">Lengua y Cultura</div>
-      <div class="course">Cálculo Vectorial
-        <div class="tooltip">Requiere: Cálculo Integral</div>
-      </div>
-      <div class="course">Física Moderna
-        <div class="tooltip">Requiere: Electricidad y Magnetismo, Ecuaciones Diferenciales</div>
-      </div>
-      <div class="course">Nanotecnología I
-        <div class="tooltip">Requiere: Materiales de Ingeniería</div>
-      </div>
-      <div class="course">Fisicoquímica
-        <div class="tooltip">Requiere: Fundamentos de la Química, Cálculo Integral</div>
-      </div>
+      <div class="materia" data-id="cristologia">Cristología</div>
+      <div class="materia" data-id="lengua-cultura">Lengua y Cultura</div>
+      <div class="materia bloqueada" data-id="calculo-vectorial" data-req="calculo-integral">Cálculo Vectorial</div>
+      <div class="materia bloqueada" data-id="fisica-moderna" data-req="electricidad,ecuaciones-dif">Física Moderna</div>
+      <div class="materia bloqueada" data-id="nano1" data-req="materiales">Nanotecnología I</div>
+      <div class="materia bloqueada" data-id="fisicoquimica" data-req="fundamentos-quimica,calculo-integral">Fisicoquímica</div>
     </div>
 
     <!-- QUINTO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>QUINTO SEMESTRE</h2>
-      <div class="course">Métodos Numéricos
-        <div class="tooltip">Requiere: Ecuaciones Diferenciales</div>
-      </div>
-      <div class="course">Programación
-        <div class="tooltip">Requiere: Cálculo Vectorial, Ecuaciones Diferenciales</div>
-      </div>
-      <div class="course">Termodinámica
-        <div class="tooltip">Requiere: Fisicoquímica, Ecuaciones Diferenciales</div>
-      </div>
-      <div class="course">Fenómenos de Transporte
-        <div class="tooltip">Requiere: Ecuaciones Diferenciales, Cálculo Vectorial</div>
-      </div>
-      <div class="course">Nanotecnología II
-        <div class="tooltip">Requiere: Nanotecnología I, Técnicas de Caracterización de Materiales</div>
-      </div>
-      <div class="course">Técnicas de Caracterización de Nanomateriales
-        <div class="tooltip">Requiere: Técnicas de Caracterización de Materiales</div>
-      </div>
+      <div class="materia bloqueada" data-id="metodos-numericos" data-req="ecuaciones-dif">Métodos Numéricos</div>
+      <div class="materia bloqueada" data-id="programacion" data-req="calculo-vectorial,ecuaciones-dif">Programación</div>
+      <div class="materia bloqueada" data-id="termodinamica" data-req="fisicoquimica,ecuaciones-dif">Termodinámica</div>
+      <div class="materia bloqueada" data-id="fenomenos-transporte" data-req="ecuaciones-dif,calculo-vectorial">Fenómenos de Transporte</div>
+      <div class="materia bloqueada" data-id="nano2" data-req="nano1,tecnicas-carac">Nanotecnología II</div>
+      <div class="materia bloqueada" data-id="tecnicas-nano" data-req="tecnicas-carac">Técnicas de Caracterización de Nanomateriales</div>
     </div>
 
     <!-- SEXTO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>SEXTO SEMESTRE</h2>
-      <div class="course">Estadística y Diseño de Experimentos</div>
-      <div class="course">Nanociencia
-        <div class="tooltip">Requiere: Física Moderna</div>
-      </div>
-      <div class="course">Reología y Nanofluidos
-        <div class="tooltip">Requiere: Fenómenos de Transporte</div>
-      </div>
-      <div class="course">Nanotecnología III
-        <div class="tooltip">Requiere: Nanotecnología II</div>
-      </div>
-      <div class="course">Coloides y Química de Superficies
-        <div class="tooltip">Requiere: Termodinámica</div>
-      </div>
-      <div class="course">Electiva II</div>
+      <div class="materia" data-id="estadistica">Estadística y Diseño de Experimentos</div>
+      <div class="materia bloqueada" data-id="nanociencia" data-req="fisica-moderna">Nanociencia</div>
+      <div class="materia bloqueada" data-id="reologia" data-req="fenomenos-transporte">Reología y Nanofluidos</div>
+      <div class="materia bloqueada" data-id="nano3" data-req="nano2">Nanotecnología III</div>
+      <div class="materia bloqueada" data-id="coloides" data-req="termodinamica">Coloides y Química de Superficies</div>
+      <div class="materia" data-id="electiva2">Electiva II</div>
     </div>
 
     <!-- SEPTIMO SEMESTRE -->
-    <div class="semester">
-      <h2>SÉPTIMO SEMESTRE</h2>
-      <div class="course">Línea de Formación I</div>
-      <div class="course">Emprendimiento y Responsabilidad Social</div>
-      <div class="course">Economía</div>
-      <div class="course">Núcleo de Integración I
-        <div class="tooltip">Requiere: Nanotecnología II, Técnicas de Caracterización de Nanomateriales, Nanociencia</div>
-      </div>
-      <div class="course">Bionanotecnología
-        <div class="tooltip">Requiere: Sistemas Bioinspirados, Nanotecnología I, Química Orgánica</div>
-      </div>
-      <div class="course">Basic Writing Skills</div>
+    <div class="semestre">
+      <h2>SEPTIMO SEMESTRE</h2>
+      <div class="materia" data-id="linea1">Línea de Formación I</div>
+      <div class="materia" data-id="emprendimiento">Emprendimiento y Responsabilidad Social</div>
+      <div class="materia" data-id="economia">Economía</div>
+      <div class="materia bloqueada" data-id="nucleo1" data-req="nano2,tecnicas-nano,nanociencia">Núcleo de Integración I</div>
+      <div class="materia bloqueada" data-id="bionano" data-req="sistemas-bio,nano1,quimica-organica">Bionanotecnología</div>
+      <div class="materia" data-id="writing">Basic Writing Skills</div>
     </div>
 
     <!-- OCTAVO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>OCTAVO SEMESTRE</h2>
-      <div class="course">Línea de Formación II</div>
-      <div class="course">Ética General</div>
-      <div class="course">Economía Internacional
-        <div class="tooltip">Requiere: Economía</div>
-      </div>
-      <div class="course">Núcleo de Integración II
-        <div class="tooltip">Requiere: Núcleo de Integración I</div>
-      </div>
-      <div class="course">Gestión de proyectos</div>
-      <div class="course">Optativa CI 2</div>
+      <div class="materia" data-id="linea2">Línea de Formación II</div>
+      <div class="materia" data-id="etica">Ética General</div>
+      <div class="materia bloqueada" data-id="economia-int" data-req="economia">Economía Internacional</div>
+      <div class="materia bloqueada" data-id="nucleo2" data-req="nucleo1">Núcleo de Integración II</div>
+      <div class="materia" data-id="gestion-proyectos">Gestión de Proyectos</div>
+      <div class="materia" data-id="optativa2">Optativa CI 2</div>
     </div>
 
     <!-- NOVENO SEMESTRE -->
-    <div class="semester">
+    <div class="semestre">
       <h2>NOVENO SEMESTRE</h2>
-      <div class="course">Línea de Formación III</div>
-      <div class="course">Ética Profesional
-        <div class="tooltip">Requiere: Ética General</div>
-      </div>
-      <div class="course">Gestión e Innovación en Nanotecnología
-        <div class="tooltip">Requiere: Economía Internacional, Nanotecnología III</div>
-      </div>
-      <div class="course">Núcleo de Integración III
-        <div class="tooltip">Requiere: Núcleo de Integración II</div>
-      </div>
-      <div class="course">Contexto profesional
-        <div class="tooltip">Requiere: Núcleo de Integración II</div>
-      </div>
-      <div class="course">Optativa CI 3</div>
+      <div class="materia" data-id="linea3">Línea de Formación III</div>
+      <div class="materia bloqueada" data-id="etica-prof" data-req="etica">Ética Profesional</div>
+      <div class="materia bloqueada" data-id="gestion-nano" data-req="economia-int,nano3">Gestión e Innovación en Nanotecnología</div>
+      <div class="materia bloqueada" data-id="nucleo3" data-req="nucleo2">Núcleo de Integración III</div>
+      <div class="materia bloqueada" data-id="contexto" data-req="nucleo2">Contexto Profesional</div>
+      <div class="materia" data-id="optativa3">Optativa CI 3</div>
     </div>
 
     <!-- DECIMO SEMESTRE -->
-    <div class="semester">
-      <h2>DÉCIMO SEMESTRE</h2>
-      <div class="course">Práctica Profesional
-        <div class="tooltip">Requiere: Todas las materias anteriores</div>
-      </div>
+    <div class="semestre">
+      <h2>DECIMO SEMESTRE</h2>
+      <div class="materia bloqueada" data-id="practica" data-req="all">Práctica Profesional</div>
     </div>
-
   </div>
+
+  <script>
+    const materias = document.querySelectorAll('.materia');
+
+    // Cargar progreso
+    const progreso = JSON.parse(localStorage.getItem("progresoNano")) || {};
+
+    materias.forEach(m => {
+      const id = m.dataset.id;
+      if (progreso[id]) m.classList.add("aprobada");
+    });
+
+    function actualizarBloqueos() {
+      materias.forEach(m => {
+        const reqs = m.dataset.req ? m.dataset.req.split(",") : [];
+        if (reqs.length > 0) {
+          const faltantes = reqs.filter(r => {
+            if (r === "all") {
+              return [...materias].some(mat => !mat.classList.contains("aprobada") && mat.dataset.id !== "practica");
+            }
+            return !progreso[r];
+          });
+          if (faltantes.length > 0) {
+            m.classList.add("bloqueada");
+            m.setAttribute("data-requisitos", "Requiere: " + faltantes.join(", "));
+          } else {
+            m.classList.remove("bloqueada");
+            m.removeAttribute("data-requisitos");
+          }
+        }
+      });
+    }
+
+    actualizarBloqueos();
+
+    materias.forEach(m => {
+      m.addEventListener("click", () => {
+        if (m.classList.contains("bloqueada")) return;
+        m.classList.toggle("aprobada");
+        progreso[m.dataset.id] = m.classList.contains("aprobada");
+        localStorage.setItem("progresoNano", JSON.stringify(progreso));
+        actualizarBloqueos();
+      });
+    });
+  </script>
 </body>
 </html>
