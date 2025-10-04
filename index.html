@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Curricular - Ingeniería Química</title>
+  <title>Malla Curricular - Ingeniería en Nanotecnología</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,7 +66,7 @@
       border-radius: 6px;
       padding: 5px;
       position: absolute;
-      z-index: 9999; /* 🔥 Para que quede siempre arriba */
+      z-index: 9999;
       bottom: 110%;
       left: 50%;
       transform: translateX(-50%);
@@ -83,83 +83,177 @@
 </head>
 <body>
 
-  <h1>Malla Curricular - Ingeniería Química</h1>
+  <h1>Malla Curricular - Ingeniería en Nanotecnología</h1>
   <div class="container">
 
-    <!-- Primer semestre -->
+    <!-- PRIMER SEMESTRE -->
     <div class="semester">
       <h2>PRIMER SEMESTRE</h2>
-      <div class="course unlocked">Lenguaje y cultura</div>
       <div class="course unlocked">Cálculo diferencial</div>
       <div class="course unlocked">Geometría analítica</div>
-      <div class="course unlocked">Fundamentos de la química</div>
-      <div class="course unlocked">Introducción a la Ing química</div>
-      <div class="course unlocked">Diseño de productos</div>
+      <div class="course unlocked">Fundamentos de la Química</div>
+      <div class="course unlocked">Introducción a la Nanotecnología</div>
+      <div class="course unlocked">Sistemas Bioinspirados</div>
+      <div class="course unlocked">Optativa CBD</div>
     </div>
 
-    <!-- Segundo semestre -->
+    <!-- SEGUNDO SEMESTRE -->
     <div class="semester">
       <h2>SEGUNDO SEMESTRE</h2>
-      <div class="course unlocked">Humanismo y cultura</div>
-      <div class="course unlocked">Cristología</div>
-      <div class="course unlocked">Álgebra lineal</div>
-      <div class="course unlocked">Cálculo integral</div>
-      <div class="course unlocked">Física mecánica</div>
-      <div class="course unlocked">Química orgánica 1</div>
+      <div class="course">Álgebra lineal
+        <div class="tooltip">Requiere: Geometría analítica</div>
+      </div>
+      <div class="course">Química inorgánica
+        <div class="tooltip">Requiere: Fundamentos de la Química</div>
+      </div>
+      <div class="course">Cálculo Integral
+        <div class="tooltip">Requiere: Cálculo diferencial</div>
+      </div>
+      <div class="course">Física mecánica
+        <div class="tooltip">Requiere: Cálculo diferencial, Geometría analítica</div>
+      </div>
+      <div class="course">Materiales de Ingeniería
+        <div class="tooltip">Requiere: Fundamentos de la Química</div>
+      </div>
+      <div class="course">Electiva I</div>
     </div>
 
-    <!-- Tercer semestre -->
+    <!-- TERCER SEMESTRE -->
     <div class="semester">
       <h2>TERCER SEMESTRE</h2>
-      <div class="course unlocked">Cálculo vectorial</div>
-      <div class="course unlocked">Ecuaciones diferenciales</div>
-      <div class="course unlocked">Electricidad y magnetismos</div>
-      <div class="course unlocked">Química orgánica 2</div>
-      <div class="course unlocked">Elementos de la programación</div>
-    </div>
-
-    <!-- Cuarto semestre -->
-    <div class="semester">
-      <h2>CUARTO SEMESTRE</h2>
-      <div class="course unlocked">Ética general</div>
-      <div class="course">Bioquímica
-        <div class="tooltip">Requiere: Química orgánica 2</div>
+      <div class="course">Humanismo, Cultura y Valores</div>
+      <div class="course">Ecuaciones Diferenciales
+        <div class="tooltip">Requiere: Cálculo Integral</div>
       </div>
-      <div class="course">Lab. de química orgánica y bioquímica
-        <div class="tooltip">Requiere: Química orgánica 2</div>
-      </div>
-      <div class="course">Fisicoquímica
-        <div class="tooltip">Requiere: Química orgánica 2</div>
-      </div>
-      <div class="course">Mecánica de fluidos
+      <div class="course">Electricidad y Magnetismo
         <div class="tooltip">Requiere: Física mecánica</div>
       </div>
-      <div class="course">Métodos numéricos
-        <div class="tooltip">Requiere: Ecuaciones diferenciales</div>
+      <div class="course">Métodos Experimentales
+        <div class="tooltip">Requiere: Física mecánica</div>
       </div>
-      <div class="course">Estadística y diseño experimental
-        <div class="tooltip">Requiere: Cálculo integral</div>
+      <div class="course">Técnicas de Caracterización de Materiales
+        <div class="tooltip">Requiere: Materiales de Ingeniería</div>
+      </div>
+      <div class="course">Química Orgánica</div>
+      <div class="course">Metodología de la investigación</div>
+    </div>
+
+    <!-- CUARTO SEMESTRE -->
+    <div class="semester">
+      <h2>CUARTO SEMESTRE</h2>
+      <div class="course">Cristología</div>
+      <div class="course">Lengua y Cultura</div>
+      <div class="course">Cálculo Vectorial
+        <div class="tooltip">Requiere: Cálculo Integral</div>
+      </div>
+      <div class="course">Física Moderna
+        <div class="tooltip">Requiere: Electricidad y Magnetismo, Ecuaciones Diferenciales</div>
+      </div>
+      <div class="course">Nanotecnología I
+        <div class="tooltip">Requiere: Materiales de Ingeniería</div>
+      </div>
+      <div class="course">Fisicoquímica
+        <div class="tooltip">Requiere: Fundamentos de la Química, Cálculo Integral</div>
       </div>
     </div>
 
-    <!-- Quinto semestre -->
+    <!-- QUINTO SEMESTRE -->
     <div class="semester">
       <h2>QUINTO SEMESTRE</h2>
-      <div class="course">Línea de formación humanista 1</div>
-      <div class="course">Emprendimiento y responsabilidad social</div>
-      <div class="course">Termodinámica clásica
-        <div class="tooltip">Requiere: Fisicoquímica</div>
+      <div class="course">Métodos Numéricos
+        <div class="tooltip">Requiere: Ecuaciones Diferenciales</div>
       </div>
-      <div class="course">Química analítica
-        <div class="tooltip">Requiere: Fundamentos de la química</div>
+      <div class="course">Programación
+        <div class="tooltip">Requiere: Cálculo Vectorial, Ecuaciones Diferenciales</div>
       </div>
-      <div class="course">Lab. de química analítica
-        <div class="tooltip">Requiere: Química analítica</div>
+      <div class="course">Termodinámica
+        <div class="tooltip">Requiere: Fisicoquímica, Ecuaciones Diferenciales</div>
       </div>
-      <div class="course">Fenómenos de transporte
-        <div class="tooltip">Requiere: Mecánica de fluidos</div>
+      <div class="course">Fenómenos de Transporte
+        <div class="tooltip">Requiere: Ecuaciones Diferenciales, Cálculo Vectorial</div>
       </div>
-      <div class="course">Metodología de la investigación</div>
+      <div class="course">Nanotecnología II
+        <div class="tooltip">Requiere: Nanotecnología I, Técnicas de Caracterización de Materiales</div>
+      </div>
+      <div class="course">Técnicas de Caracterización de Nanomateriales
+        <div class="tooltip">Requiere: Técnicas de Caracterización de Materiales</div>
+      </div>
+    </div>
+
+    <!-- SEXTO SEMESTRE -->
+    <div class="semester">
+      <h2>SEXTO SEMESTRE</h2>
+      <div class="course">Estadística y Diseño de Experimentos</div>
+      <div class="course">Nanociencia
+        <div class="tooltip">Requiere: Física Moderna</div>
+      </div>
+      <div class="course">Reología y Nanofluidos
+        <div class="tooltip">Requiere: Fenómenos de Transporte</div>
+      </div>
+      <div class="course">Nanotecnología III
+        <div class="tooltip">Requiere: Nanotecnología II</div>
+      </div>
+      <div class="course">Coloides y Química de Superficies
+        <div class="tooltip">Requiere: Termodinámica</div>
+      </div>
+      <div class="course">Electiva II</div>
+    </div>
+
+    <!-- SEPTIMO SEMESTRE -->
+    <div class="semester">
+      <h2>SÉPTIMO SEMESTRE</h2>
+      <div class="course">Línea de Formación I</div>
+      <div class="course">Emprendimiento y Responsabilidad Social</div>
+      <div class="course">Economía</div>
+      <div class="course">Núcleo de Integración I
+        <div class="tooltip">Requiere: Nanotecnología II, Técnicas de Caracterización de Nanomateriales, Nanociencia</div>
+      </div>
+      <div class="course">Bionanotecnología
+        <div class="tooltip">Requiere: Sistemas Bioinspirados, Nanotecnología I, Química Orgánica</div>
+      </div>
+      <div class="course">Basic Writing Skills</div>
+    </div>
+
+    <!-- OCTAVO SEMESTRE -->
+    <div class="semester">
+      <h2>OCTAVO SEMESTRE</h2>
+      <div class="course">Línea de Formación II</div>
+      <div class="course">Ética General</div>
+      <div class="course">Economía Internacional
+        <div class="tooltip">Requiere: Economía</div>
+      </div>
+      <div class="course">Núcleo de Integración II
+        <div class="tooltip">Requiere: Núcleo de Integración I</div>
+      </div>
+      <div class="course">Gestión de proyectos</div>
+      <div class="course">Optativa CI 2</div>
+    </div>
+
+    <!-- NOVENO SEMESTRE -->
+    <div class="semester">
+      <h2>NOVENO SEMESTRE</h2>
+      <div class="course">Línea de Formación III</div>
+      <div class="course">Ética Profesional
+        <div class="tooltip">Requiere: Ética General</div>
+      </div>
+      <div class="course">Gestión e Innovación en Nanotecnología
+        <div class="tooltip">Requiere: Economía Internacional, Nanotecnología III</div>
+      </div>
+      <div class="course">Núcleo de Integración III
+        <div class="tooltip">Requiere: Núcleo de Integración II</div>
+      </div>
+      <div class="course">Contexto profesional
+        <div class="tooltip">Requiere: Núcleo de Integración II</div>
+      </div>
+      <div class="course">Optativa CI 3</div>
+    </div>
+
+    <!-- DECIMO SEMESTRE -->
+    <div class="semester">
+      <h2>DÉCIMO SEMESTRE</h2>
+      <div class="course">Práctica Profesional
+        <div class="tooltip">Requiere: Todas las materias anteriores</div>
+      </div>
     </div>
 
   </div>
